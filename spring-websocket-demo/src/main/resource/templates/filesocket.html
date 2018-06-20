@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Thymeleaf Example</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+<script type="text/javascript" th:src="@{/js/jquery-1.11.1.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+<style type="text/css">
+.split {
+	border-bottom: 1px solid #ccc;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+</style>
+</head>
+<body>
+
+	<div class="container">
+		<h1 th:text="${message}">Welcome Thymeleaf</h1>
+		<div class="row">
+			<div class="col-lg-3 col-md-4 col-sm-6">
+				<span class="label label-default">Start File Server</span> <a
+					th:href="@{/filesocket/start}"><span
+					class="glyphicon glyphicon-play btn btn-primary" aria-hidden="true"></span></a>
+			</div>
+			
+			<div class="col-lg-3 col-md-4 col-sm-6">
+				<span class="label label-default">Stop File Server</span> <a
+					th:href="@{/filesocket/stop}"><span
+					class="glyphicon glyphicon-stop btn btn-danger" aria-hidden="true"></span></a>
+			</div>
+		</div>
+		<div class="split"></div>
+
+	</div>
+
+</body>
+</html>
