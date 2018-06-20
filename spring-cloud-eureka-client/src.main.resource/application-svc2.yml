@@ -1,0 +1,5 @@
+config.name: SVC-2
+server.port : 9762
+
+user.eureka.server.port: 8762
+
