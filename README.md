@@ -14,4 +14,4 @@
 
 > requirejs+bootstrap+codemirror
 
-这个项目使用了requirejs，bootstrap和codemirror, 户可以使用比较漂亮的编辑器去编写代码
+这个项目使用了requirejs，bootstrap和codemirror, 用户可以使用比较漂亮的编辑器去编写代码
