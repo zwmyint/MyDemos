@@ -1,7 +1,9 @@
 > requirejs+bootstrap+codemirror
+
 这个项目使用了requirejs，bootstrap和codemirror, 户可以使用比较漂亮的编辑器去编写代码
 
 > spring-cloud-xxx
+
 以下项目演示如何使用springcloud构建自己的微服务平台
 
 - spring-cloud-eureka 启动一个eureka服务注册中心
