@@ -1,0 +1,7 @@
+server.port: 9502
+
+user.peer2.port: 8761
+eureka.instance.hostname: localhost
+
+# Config eureka service url for eureka client
+eureka.client.serviceUrl.defaultZone: http://${eureka.instance.hostname}:${user.peer2.port}/eureka/

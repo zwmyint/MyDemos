@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: svc1
+  application:
+    name: feign-consumer
+
+feign:
+  hystrix:
+    enabled: true
+    
+
+
+
