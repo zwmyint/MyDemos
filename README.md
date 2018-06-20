@@ -8,7 +8,8 @@
 - spring-cloud-hystrix-dashboard 这个项目(spring-cloud-service-consumer)开启了熔断保护，因此可以通过dashboard来查看服务的健康状况
 - spring-cloud-feigin 这个项目使用feign演示ribbon以及hystrix熔断功能，feigin是对ribbon和hystrix的一个高层次封装
 
-> spring-websocket-demo
+> spring-websocket-demo  
+
 这个项目整合了java based websocket和fileupload功能
 
 > requirejs+bootstrap+codemirror
