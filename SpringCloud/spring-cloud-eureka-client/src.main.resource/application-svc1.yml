@@ -1,0 +1,5 @@
+config.name: SVC-1
+server.port: 9761
+
+user.eureka.server.port: 8761
+
