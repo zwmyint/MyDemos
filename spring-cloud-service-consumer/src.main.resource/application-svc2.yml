@@ -1,7 +1,0 @@
-server.port: 9002
-spring.application.name: ribbon-consumer-2
-
-eureka.instance.hostname: localhost
-user.eureka.server.port: 8761
-user.service.name: HELLO-SERVICE
-eureka.client.serviceUrl.defaultZone: http://${eureka.instance.hostname}:${user.eureka.server.port}/eureka/
