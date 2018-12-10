@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+
+    <ul>
+        <li><span class="people">People1</span>
+            <ul class="students">
+                <li><span class="stu">Student1</span>
+                    <ul class="courses">
+                        <li>Math1</li>
+                        <li>English1</li>
+                    </ul>
+                </li>
+                <li><span class="stu">Student2</span>
+                    <ul class="courses">
+                        <li>Math2</li>
+                        <li>English2</li>
+                    </ul>
+               </li>
+            </ul>
+        </li>
+
+        <li><span class="people">People2</span>
+            <ul class="students">
+                <li><span class="stu">Student3</span>
+                    <ul class="courses">
+                        <li>Math3</li>
+                        <li>English3</li>
+                    </ul>
+                </li>
+                <li><span class="stu">Student4</span>
+                    <ul class="courses">
+                        <li>Math4</li>
+                        <li>English4</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        
+    </ul>
+
+    <script>
+        $("li span.people").on("click", function() {
+            var liEle = $(this).parent()[0];
+            var ulEle = $("ul.students", liEle)[0];
+            toggleElement(ulEle);
+        });
+
+        $("span.stu").on("click", function() {
+            var liEle = $(this).parent()[0];
+            var ulEle = $("ul.courses", liEle)[0];
+            toggleElement(ulEle);
+        });
+
+        var toggleElement = function(ele) {
+            var displayVal = $(ele).css("display");
+            if("none" === displayVal) {
+                $(ele).css("display", "block");
+            } else {
+                $(ele).css("display", "none");
+            }
+        }
+
+    </script>
+    
+</body>
+</html>

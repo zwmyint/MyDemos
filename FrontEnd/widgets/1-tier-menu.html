@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<style>
+    ul.students {
+        display: none;
+    }
+</style>
+<body>
+
+        <ul>
+            <li><span class="people">People1</span>
+                <ul class="students">
+                    <li><span>Student1
+                    </span></li>
+                    <li><span>Student2
+                    </span></li>
+                </ul>
+            </li>
+    
+            <li><span class="people">People2</span>
+                <ul class="students">
+                    <li><span>Student3
+                    </span></li>
+                    <li><span>Student4
+                    </span></li>
+                </ul>
+            </li>
+                
+        </ul>
+            
+    <script>
+        $("li span.people").on("click", function() {
+            var liEle = $(this).parent()[0];
+            var ulEle = $("ul.students", liEle)[0];
+            var displayVal = $(ulEle).css("display");
+            if("none" === displayVal) {
+                $(ulEle).css("display", "block");
+            } else {
+                $(ulEle).css("display", "none");
+            }
+        });
+    </script>
+</body>
+</html>
