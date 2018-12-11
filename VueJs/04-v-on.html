@@ -10,11 +10,15 @@
 
 <body>
     <div id="name">
-        <!--使用v-bind 设置属性-->
+        <!--使用v-on 绑定事件-->
         <input type="button" value="Click" v-on:click="show"/>
+        <br>
+        <!--使用@简写形式-->
+        <input type="button" value="ClickMe" @click="show"/>
     </div>
+
 <script src="./libs/Vue-v2.5.17.js"></script>
-<script>
+    <script>
         var vm = new Vue({
             el: '#name',
             data: {
