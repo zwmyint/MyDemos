@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,14 +16,15 @@
         }
     </style>
 </head>
+
 <body>
 
     <div id="app">
-       <!--创建或者删除元素-->
-       <h1 v-if="flag">v-if test</h1>
-       <!--添加display:none属性，不删除元素-->
-       <h1 v-show="flag">v-show test</h1>
-       <input type="button" value="Click" @click="flag=!flag">
+        <!--创建或者删除元素-->
+        <h1 v-if="flag">v-if test</h1>
+        <!--添加display:none属性，不删除元素-->
+        <h1 v-show="flag">v-show test</h1>
+        <input type="button" value="Click" @click="flag=!flag">
     </div>
 
 
@@ -32,12 +34,13 @@
         var vm = new Vue({
             el: '#app',
             data: {
-              flag: true
+                flag: true
             },
             methods: {
-                
+
             }
         });
     </script>
 </body>
+
 </html>
