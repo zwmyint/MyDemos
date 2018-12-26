@@ -225,7 +225,7 @@ import "./css/index.css"
 
 ```
 
-## 6. Configure url loader
+## 6. Configure url loader  (png|jpg|gif|woff(2)|ttf|eot|svg)
 
 1. Install
 
@@ -254,5 +254,33 @@ rules: [
     ]
 
 ```
+
+## 7. (Optional) Install bootstrap4
+
+1. Install
+
+```js
+
+npm install bootstrap jquery popper.js -D
+
+```
+
+2. Import bootstrap in src/index.js
+
+```js
+
+//import jquery
+import $ from "jquery"
+
+//import bootstrap javascript
+import 'bootstrap'
+
+//import bootstrap style
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+```
+
+8. (Optional) font-awesome
+
 
 

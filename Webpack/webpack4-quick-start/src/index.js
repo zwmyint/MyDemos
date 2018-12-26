@@ -1,5 +1,15 @@
+//import jquery
+import $ from "jquery"
+
+//import bootstrap javascript
+import 'bootstrap'
+
+//import bootstrap style
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 
 import "./css/index.css"
+
 
 
 
