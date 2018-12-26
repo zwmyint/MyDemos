@@ -119,7 +119,6 @@ npm i html-webpack-plugin html-loader --save-dev
 // 1.Import html-webpack-plugin
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
-
 module.exports = {
   module: {
     rules: [
@@ -129,6 +128,15 @@ module.exports = {
         use: {
           loader: "babel-loader"
         }
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader",
+            options: {minimize: true}
+          }
+        ]
       }
     ]
   },
@@ -149,6 +157,101 @@ module.exports = {
 ```js
 
 npm i webpack-dev-server --save-dev
+
+```
+
+## 5. Configure css loader with mini-css-extract-plugin
+
+1. Install
+
+```js
+
+npm i mini-css-extract-plugin css-loader --save-dev
+
+```
+
+2. Update rules of webpack.config.js
+
+```js
+// 1.Import html-webpack-plugin
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader",
+            options: {minimize: true}
+          }
+        ]
+      },
+      { //Css loader
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"]
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: "src/index.html",  //指定模板文件
+      filename: "index.html"  //这里只需要指定文件的名字，文件会自动生成在dist目录
+    }),
+    new MiniCssExtractPlugin({ //Css loader
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    })
+  ]
+}
+
+
+```
+
+3. Update src/index.js 
+
+```js
+
+import "./css/index.css"
+
+```
+
+## 6. Configure url loader
+
+1. Install
+
+```js
+
+npm install url-loader file-loader --save-dev
+
+```
+
+2. update webpack.config.js
+
+```js
+
+rules: [
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }
+        ]
+      }
+    ]
 
 ```
 

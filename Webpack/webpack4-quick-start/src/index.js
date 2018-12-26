@@ -1,5 +1,5 @@
 
-
+import "./css/index.css"
 
 
 
