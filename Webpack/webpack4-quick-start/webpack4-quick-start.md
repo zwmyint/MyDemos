@@ -282,5 +282,28 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 8. (Optional) font-awesome
 
+1. Install
+
+```js
+
+npm i font-awesome --save-dev
+
+npm i css-loader less-loader style-loader --save-dev
+
+npm i font-awesome-webpack-4 --save-dev
+
+npm i less --save-dev
+
+```
+
+2. update src/index.js
+
+```js
+
+//Import font-awesome
+reqiure( 'font-awesome-webpack-4')
+
+```
+
 
 

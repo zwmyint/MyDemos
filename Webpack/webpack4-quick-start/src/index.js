@@ -7,6 +7,8 @@ import 'bootstrap'
 //import bootstrap style
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+//Import font-awesome
+import 'font-awesome-webpack-4'
 
 import "./css/index.css"
 
