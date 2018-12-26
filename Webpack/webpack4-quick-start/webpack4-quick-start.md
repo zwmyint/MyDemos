@@ -27,7 +27,7 @@ npm i webpack -g
 npm i webpack webpack-cli --save-dev
 ```
 
-4. Create src/css, src/images, src/js/, src/css folder under the project
+4. Create src/css, src/images, src/js folder under the project
 
 5. Create index.html and index.js(Must, because it is the default entry!!!) in src folder.
 
