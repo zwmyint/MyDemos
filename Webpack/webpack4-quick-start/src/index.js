@@ -8,7 +8,8 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 //Import font-awesome
-import 'font-awesome/css/font-awesome.css'
+
+import '@fortawesome/fontawesome-free/css/all.css'
 
 import "./css/index.css"
 

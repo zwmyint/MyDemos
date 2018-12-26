@@ -280,18 +280,13 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 ```
 
-8. (Optional) font-awesome v.4.7.0
+8. (Optional) fontawesome-free v5.6.3
 
 1. Install
 
 ```js
 
-npm i font-awesome --save-dev
-
 npm i css-loader less-loader style-loader --save-dev
-
-npm i font-awesome-webpack-4 --save-dev
-
 npm i less --save-dev
 
 ```
