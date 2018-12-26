@@ -3,7 +3,7 @@
 ## Intergration with *Babel, html-webpack-plugin, webpack-dev-server, mini-css-extract-plugin, url-loader, bootstrap4, fontawesome-free v5.6.3*
 
 
-# How to use
+## How to use
 
 1. Download it and move to root folder
 
@@ -18,7 +18,7 @@ npm install
 npm run dev/build/start
 ```
 
-# Tested Env Info:
+## Tested Env Info:
 
 ```
 
