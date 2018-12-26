@@ -1,0 +1,155 @@
+[webpack4-quick-start](https://www.valentinog.com/blog/webpack-tutorial/)
+
+# Webpack 4 configuration
+
+## 1. Webpack configuration 
+
+1. Create empty project named webpack4-quick-start and move into it
+
+2. Initialize a package.json by running:
+
+```js
+
+npm init -y
+
+```
+
+3. Install webpack and webpack-cli
+
+```js
+
+//3.1 全局安装
+npm i webpack -g
+
+//3.2 Local安装
+
+// --save-dev == -D
+npm i webpack webpack-cli --save-dev
+```
+
+4. Create src/css, src/images, src/js/, src/css folder under the project
+
+5. Create index.html and index.js(Must, because it is the default entry!!!) in src folder.
+
+6. Edit package.json and edit scripts section.
+
+```js
+
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
+
+
+/*
+* 1. Webpack will take the src/index.js as default entry point and take dist/main.js as default bludle output.
+* 2. You can follow this to override the default entry point and output.
+*/ 
+
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development ./foo/src/js/index.js --output ./foo/main.js",
+    "build": "webpack --mode development ./foo/src/js/index.js --output ./foo/main.js"
+  },
+
+```
+
+7. Create webpack.config.js in the root of webpack4-quick-start folder
+
+## 2. Configure Babel
+
+> Transpiling Javascript ES6 
+
+1. Install
+
+```js
+
+npm i @babel/core babel-loader @babel/preset-env --save-dev
+
+```
+
+2. Create .babelrc in the root of the webpack4-quick-start and edit it.
+
+```js
+
+{
+    "presets": [
+        "@babel/preset-env"
+    ]
+}
+
+```
+
+3. Edit webpack.config.js
+
+```js 
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader" //babel loader
+        }
+      }
+    ]
+  }
+}
+
+```
+
+
+## 3. Configure html-webpack-plugin
+
+1. Install
+
+```js
+
+npm i html-webpack-plugin html-loader --save-dev
+
+```
+
+2. Update webpack.config.js
+
+```js
+
+// 1.Import html-webpack-plugin
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: "src/index.html",  //指定模板文件
+      filename: "index.html"  //这里只需要指定文件的名字，文件会自动生成在dist目录
+    })
+  ]
+}
+
+```
+
+## 4. Configure webpack dev server
+
+1. Install 
+
+```js
+
+npm i webpack-dev-server --save-dev
+
+```
+
+
