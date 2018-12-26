@@ -1,4 +1,4 @@
-# This is a quick-start Vue project using webpack v4.28.2
+# This is a quick-start **Vue** project using webpack v4.28.2
 
 ## Intergration with *Babel, html-webpack-plugin, webpack-dev-server, mini-css-extract-plugin, url-loader, bootstrap4, fontawesome-free v5.6.3*
 
