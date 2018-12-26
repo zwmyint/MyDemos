@@ -280,7 +280,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 ```
 
-8. (Optional) font-awesome
+8. (Optional) font-awesome v.4.7.0
 
 1. Install
 
