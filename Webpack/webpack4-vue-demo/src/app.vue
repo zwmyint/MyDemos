@@ -13,7 +13,7 @@
 
     <!-- 底部Tapbar -->
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom">
+<nav class="navbar navbar-expand-sm navbar-light bg-light fixed-bottom">
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav nav-bottom">
       <li class="nav-item active">
