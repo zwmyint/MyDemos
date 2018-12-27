@@ -15,16 +15,20 @@
     <div class='bottom-tabbar'>
       <ul class="list-inline nav-bottom">
             <li class="list-inline-item active">
-              <a class="nav-link" href="#"><i class="fas fa-home"></i>Home</a>
+              <i class="fas fa-home"></i>
+              <a class="nav-link" href="#">Home</a>
             </li>
             <li class="list-inline-item">
-              <a class="nav-link" href="#"><i class="fas fa-envelope"></i>Message</a>
+              <i class="fas fa-envelope"></i>
+              <a class="nav-link" href="#">Message</a>
             </li>
             <li class="list-inline-item">
-              <a class="nav-link" href="#"><i class="far fa-address-book"></i>Contacts</a>
+              <i class="far fa-address-book"></i>
+              <a class="nav-link" href="#">Contacts</a>
             </li>
             <li class="list-inline-item">
-              <a class="nav-link" href="#"><i class="fas fa-cogs"></i>Setting</a>
+              <i class="fas fa-cogs"></i>
+              <a class="nav-link" href="#">Setting</a>
             </li>
           </ul>
     </div>
@@ -40,6 +44,7 @@
 </script>
 
 <style scoped>
+
 div.app-container {
   padding-top: 56px;
 }
@@ -60,7 +65,15 @@ div.bottom-tabbar {
 ul.nav-bottom {
   background-color: #e3f2fd;
   margin: 0 auto;
+}
 
+ul.nav-bottom .nav-link {
+    display: block;
+    padding: .1rem .5rem;
+}
+
+ul.nav-bottom a {
+  color : black;
 }
 
 
