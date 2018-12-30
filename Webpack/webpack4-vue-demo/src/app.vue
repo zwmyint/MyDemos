@@ -11,24 +11,30 @@
 
     <!-- Router -->
 
+    <router-view></router-view>
+
     <!-- 底部Tapbar -->
     <div class='bottom-tabbar'>
       <ul class="list-inline nav-bottom">
             <li class="list-inline-item active">
+              <router-link to="/home">
               <i class="fas fa-home"></i>
-              <a class="nav-link" href="#">Home</a>
+              <span class="nav-link" href="#">Home</span></router-link>
             </li>
             <li class="list-inline-item">
+              <router-link to="/message">
               <i class="fas fa-envelope"></i>
-              <a class="nav-link" href="#">Message</a>
+              <span class="nav-link" href="#">Message</span></router-link>
             </li>
             <li class="list-inline-item">
+              <router-link to="/contacts">
               <i class="far fa-address-book"></i>
-              <a class="nav-link" href="#">Contacts</a>
+              <span class="nav-link" href="#">Contacts</span></router-link>
             </li>
             <li class="list-inline-item">
+              <router-link to="/setting">
               <i class="fas fa-cogs"></i>
-              <a class="nav-link" href="#">Setting</a>
+              <span class="nav-link" href="#">Setting</span></router-link>
             </li>
           </ul>
     </div>
@@ -74,6 +80,14 @@ ul.nav-bottom .nav-link {
 
 ul.nav-bottom a {
   color : black;
+}
+
+ul.nav-bottom a.active i, ul.nav-bottom a.active span{
+  color:deepskyblue;
+}
+
+ul.nav-bottom li {
+  padding-top: .2em;
 }
 
 
