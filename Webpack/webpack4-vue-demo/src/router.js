@@ -9,6 +9,7 @@ import setting from './componments/tabbar/setting.vue'
 
 const router = new VueRouter({
   routes: [
+    { path: '/', redirect: '/home' },
     { path: '/contacts', component: contacts },
     { path: '/home', component: home },
     { path: '/message', component: message },

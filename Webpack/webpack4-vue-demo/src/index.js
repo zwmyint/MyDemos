@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@fortawesome/fontawesome-free/css/all.css'
+import './libs/animate-v3.7.0.css'
 import "./css/index.css"
 
 import Vue from 'vue'
@@ -7,6 +8,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 //注册路由的包
 Vue.use(VueRouter)
+
+//导入Vue中的Ajax模块
+
+import VueResource from 'vue-resource'
+Vue.use(VueResource)
 
 
 import router from './router.js'

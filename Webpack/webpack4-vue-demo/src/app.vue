@@ -10,8 +10,14 @@
     </nav>
 
     <!-- Router -->
-
-    <router-view></router-view>
+      
+      <div class="router-view container">
+        <transition mode='out-in' enter-active-class="fadeInRight" leave-active-class="fadeOutLeft">
+          <router-view class="animated"></router-view>
+        </transition>
+      </div>
+      
+    
 
     <!-- 底部Tapbar -->
     <div class='bottom-tabbar'>
@@ -53,6 +59,7 @@
 
 div.app-container {
   padding-top: 56px;
+  overflow-x: hidden;
 }
 
 span.nav-header {
@@ -89,6 +96,12 @@ ul.nav-bottom a.active i, ul.nav-bottom a.active span{
 ul.nav-bottom li {
   padding-top: .2em;
 }
+
+div.router-view {
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
 
 
 </style>
