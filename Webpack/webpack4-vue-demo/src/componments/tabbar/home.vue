@@ -33,8 +33,9 @@
     <div class='menu-container'>
       <div class="row">
         <div class="col-4 menu">
-          <p class='menu-icon'><i class="fas fa-home"></i></p>
-          <span class='title'>haha</span>
+          <router-link to="/home/news">
+          <p class='menu-icon'><i class="fas fa-newspaper"></i></p>
+          <span class='title'>News</span></router-link>
         </div>
         <div class="col-4 menu">
           <p class='menu-icon'><i class="fas fa-home"></i></p>
