@@ -21,7 +21,6 @@ public class FileUtil {
     Writer out = null;
     try {
       out = new OutputStreamWriter(new FileOutputStream(file, append), "UTF-8");
-      out.write(new String(new byte[]{(byte) 0xEF, (byte) 0xBB, (byte) 0xBF}));
       out.write(content);
       out.flush();
       logger.info("write file " + file.getPath());
