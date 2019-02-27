@@ -84,11 +84,17 @@ public class ReadPDFWithPDFBox {
       for (String key : rect.keySet()) {
         String text = textStripper.getTextForRegion(key).trim();
         if ("InvoiceCode".equals(key)) {
+          text = text.replace(":", "").replace("：", "").trim();
+          text = text + " ";
         } else if ("InvoiceNum".equals(key)) {
           text = text.replace(":", "").replace("：", "").trim();
+          text = text + " ";
         } else if ("Name".equals(key)) {
           text = text.replace(":", "").replace("：", "").trim();
         } else if ("Money".equals(key)) {
+          text = text.replace(":", "").replace("：", "")
+              .replace("￥", "").replace("¥", "").trim();
+          text = text + " ";
         }
         if (text.length() == 0) {
           logger.error("Parse File Error :{}", this.file.getName());
@@ -230,9 +236,9 @@ public class ReadPDFWithPDFBox {
   }
 
 
-  public void getFullPage() {
+  public void getFullPage(File file) {
     try {
-      PDDocument document = PDDocument.load(new File("C:/AAA/simple.pdf"));
+      PDDocument document = PDDocument.load(file);
       PDFTextStripperByArea textStripper = new PDFTextStripperByArea();
       PDFTextStripper stripper = new PDFTextStripper();
       stripper.setSortByPosition(true);

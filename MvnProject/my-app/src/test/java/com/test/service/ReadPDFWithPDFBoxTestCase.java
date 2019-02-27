@@ -1,19 +1,36 @@
 package com.test.service;
 
 import java.io.File;
+import java.net.URL;
 import java.util.stream.Stream;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReadPDFWithPDFBoxTestCase {
 
-  private File pdf = new File("C:/AAA/simple_telecom.pdf");
+  private URL resource;
+  private File pdf;
+  private ReadPDFWithPDFBox readPDFWithPDFBox;
 
-  private ReadPDFWithPDFBox readPDFWithPDFBox = new ReadPDFWithPDFBox(pdf);
+
+  @Before
+  public void init() {
+    resource = ReadPDFWithPDFBoxTestCase.class.getResource("/simple_telecom.pdf");
+    try {
+      pdf = new File(resource.toURI());
+      readPDFWithPDFBox = new ReadPDFWithPDFBox(pdf);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+  }
+
+
 
   @Test
   public void getFullPage() {
-    readPDFWithPDFBox.getFullPage();
+    readPDFWithPDFBox.getFullPage(pdf);
   }
 
   @Test
@@ -113,12 +130,17 @@ public class ReadPDFWithPDFBoxTestCase {
 
   @Test
   public void extractFolder() {
-    File dir = new File("C:/AAA/pdfs");
-    Stream.of(dir.listFiles()).forEach(pdf->{
-      ReadPDFWithPDFBox readPDFWithPDFBox = new ReadPDFWithPDFBox(pdf);
-      readPDFWithPDFBox.extractText();
+    URL dirResource = ReadPDFWithPDFBoxTestCase.class.getResource("/");
+    try {
+      File dir = new File(dirResource.toURI());
+      Stream.of(dir.listFiles()).forEach(pdf -> {
+        ReadPDFWithPDFBox readPDFWithPDFBox = new ReadPDFWithPDFBox(pdf);
+        readPDFWithPDFBox.extractText();
+      });
+    } catch (Exception e) {
 
-    });
+    }
+
   }
 
 }
