@@ -1,6 +1,5 @@
 package com.test.service;
 
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,13 +9,16 @@ import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class WritePDFToCSV {
+public class WritePDFToExcel {
 
   private static final Logger logger = LoggerFactory.getLogger(WritePDFToCSV.class);
 
   public static void main(String[] args) {
     String rootPath = args[0];
-    File root = new File(rootPath);
+    WritePDFToExcel.write(new File(rootPath));
+  }
+
+  public static void write(File root) {
     if (!root.exists()) {
       logger.error("Invalid pdf dir error!!");
       return;
@@ -29,17 +31,9 @@ public class WritePDFToCSV {
         result.add(readPDFWithPDFBox.extractText());
       });
     }
-    StringBuffer csvContent = new StringBuffer();
-    csvContent.append("姓名").append(",").append("发票代码").append(",")
-        .append("发票号码").append(",").append("金额").append("\r\n");
-
-    result.forEach(pdfContent -> csvContent.
-        append(pdfContent.get("Name")).append(",").
-        append(pdfContent.get("InvoiceCode")).append(",").
-        append(pdfContent.get("InvoiceNum")).append(",").
-        append(pdfContent.get("Money")).append("\r\n"));
-    File csv = new File(rootPath + File.separator + "result.csv");
-    FileUtil.writeFile(csvContent.toString(), csv);
+    String[] headers = {"Name", "InvoiceCode", "InvoiceNum", "Money"};
+    ApachePOIUtil
+        .write(headers, result, new File(root.getAbsolutePath() + File.separator + "result.xlsx"));
   }
 
 }
