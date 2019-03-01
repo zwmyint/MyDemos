@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 public class WritePDFToExcel {
 
-  private static final Logger logger = LoggerFactory.getLogger(WritePDFToCSV.class);
+  private static final Logger logger = LoggerFactory.getLogger(WritePDFToExcel.class);
 
   public static void main(String[] args) {
     String rootPath = args[0];
