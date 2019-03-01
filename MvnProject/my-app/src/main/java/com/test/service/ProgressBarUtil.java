@@ -6,9 +6,9 @@ import static org.fusesource.jansi.Ansi.Color.DEFAULT;
 import static org.fusesource.jansi.Ansi.Color.GREEN;
 import static org.fusesource.jansi.Ansi.ansi;
 
-public class JansiUtil {
+public class ProgressBarUtil {
 
-  private static String buildProgressBar(int cellNum, int sum) {
+  public static String buildProgressBar(int cellNum, int sum) {
     String cell = "█";
     String empty = "░";
     String progressBar = "";
@@ -33,7 +33,7 @@ public class JansiUtil {
     return progressBar;
   }
 
-  private static String buildDone(int cellNum, int sum) {
+  public static String buildDone(int cellNum, int sum) {
     String cell = "█";
     String colorCells = "";
     StringBuffer sb = new StringBuffer();
