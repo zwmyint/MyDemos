@@ -100,6 +100,7 @@ public class ReadPDFWithPDFBox {
           logger.error("Parse File Error :{}", this.file.getName());
           break;
         }
+        logger.info("{}:{}", key, text);
         result.put(key, text);
       }
 
@@ -233,8 +234,9 @@ public class ReadPDFWithPDFBox {
 
 
   public void getFullPage(File file) {
+    PDDocument document = null;
     try {
-      PDDocument document = PDDocument.load(file);
+      document = PDDocument.load(file);
       PDFTextStripperByArea textStripper = new PDFTextStripperByArea();
       PDFTextStripper stripper = new PDFTextStripper();
       stripper.setSortByPosition(true);
@@ -252,6 +254,14 @@ public class ReadPDFWithPDFBox {
       System.out.println();
     } catch (IOException e) {
       e.printStackTrace();
+    } finally {
+      if (null != document) {
+        try {
+          document.close();
+        } catch (Exception e) {
+          logger.error("Close File Error :{}", this.file.getName());
+        }
+      }
     }
   }
 

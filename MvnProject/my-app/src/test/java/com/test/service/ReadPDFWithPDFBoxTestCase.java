@@ -133,7 +133,7 @@ public class ReadPDFWithPDFBoxTestCase {
     URL dirResource = ReadPDFWithPDFBoxTestCase.class.getResource("/");
     try {
       File dir = new File(dirResource.toURI());
-      Stream.of(dir.listFiles()).forEach(pdf -> {
+      Stream.of(dir.listFiles()).filter(file -> file.getName().endsWith(".pdf")).forEach(pdf -> {
         ReadPDFWithPDFBox readPDFWithPDFBox = new ReadPDFWithPDFBox(pdf);
         readPDFWithPDFBox.extractText();
       });

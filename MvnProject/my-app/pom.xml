@@ -135,7 +135,6 @@
             </descriptorRefs>
             <archive>
               <manifest>
-                <!--<mainClass>com.test.service.WritePDFToCSV</mainClass>-->
                 <mainClass>com.test.service.WritePDFToExcel</mainClass>
               </manifest>
             </archive>
