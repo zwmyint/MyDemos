@@ -114,10 +114,6 @@ public class ReadPDFWithPDFBox {
         }
       }
     }
-    for (String key : result.keySet()) {
-      logger.info("{}:{}", key, result.get(key));
-    }
-    logger.info("----------------");
     return result;
   }
 

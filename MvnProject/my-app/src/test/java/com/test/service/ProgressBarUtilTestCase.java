@@ -10,12 +10,12 @@ public class ProgressBarUtilTestCase {
 
   @Test
   public void buildProgressBar() {
-    logger.info(ProgressBarUtil.buildProgressBar(50, 100));
+    logger.info(ProgressBarUtil.buildProgressBar(80, 100));
   }
 
   @Test
   public void buildDone() {
-    logger.info(ProgressBarUtil.buildDone(100, 100));
+    logger.info(ProgressBarUtil.buildDone());
   }
 
 }
