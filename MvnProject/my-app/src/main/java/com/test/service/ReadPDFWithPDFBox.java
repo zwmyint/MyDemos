@@ -47,7 +47,6 @@ public class ReadPDFWithPDFBox {
   private String getPDFType(PDDocument document) {
     String type = "";
     try {
-      PDFTextStripperByArea textStripper = new PDFTextStripperByArea();
       PDFTextStripper stripper = new PDFTextStripper();
       stripper.setSortByPosition(true);
       stripper.setStartPage(1);
@@ -120,8 +119,9 @@ public class ReadPDFWithPDFBox {
 
   private String getSectionOfPage(Rectangle2D rect, int pageIndex) {
     String textForRegion = "";
+    PDDocument document = null;
     try {
-      PDDocument document = PDDocument.load(this.file);
+      document = PDDocument.load(this.file);
       PDFTextStripperByArea textStripper = new PDFTextStripperByArea();
       textStripper.addRegion("region", rect);
       PDPage docPage = document.getPage(pageIndex);
@@ -130,6 +130,14 @@ public class ReadPDFWithPDFBox {
 
     } catch (Exception e) {
       e.printStackTrace();
+    } finally {
+      try {
+        if (null != document) {
+          document.close();
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
     return textForRegion;
   }

@@ -27,7 +27,6 @@ public class ReadPDFWithPDFBoxTestCase {
   }
 
 
-
   @Test
   public void getFullPage() {
     readPDFWithPDFBox.getFullPage(pdf);
