@@ -100,7 +100,7 @@ public class ReadPDFWithPDFBox {
           logger.error("Parse File Error :{}", this.file.getName());
           break;
         }
-        logger.info("{}:{}", key, text);
+//        logger.info("{}:{}", key, text);
         result.put(key, text);
       }
 

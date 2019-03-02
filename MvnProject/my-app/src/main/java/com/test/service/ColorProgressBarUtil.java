@@ -6,17 +6,17 @@ import static org.fusesource.jansi.Ansi.Color.DEFAULT;
 import static org.fusesource.jansi.Ansi.Color.GREEN;
 import static org.fusesource.jansi.Ansi.ansi;
 
-public class ProgressBarUtil {
+public class ColorProgressBarUtil {
 
   public final static int EMPTYS = 48;
 
   public static String buildProgressBar(int completedJobs, int sumJobs) {
     if (completedJobs == sumJobs) {
-      return ProgressBarUtil.buildDone();
+      return ColorProgressBarUtil.buildDone();
     }
     int cellNum = (completedJobs * EMPTYS / sumJobs);
     String cell = "█";
-    String empty = "░";
+    String empty = "▁";
     String progressBar = "";
     String colorCells = "";
     String colorEmptys = "";

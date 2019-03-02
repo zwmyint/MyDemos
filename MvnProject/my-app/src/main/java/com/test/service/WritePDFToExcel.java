@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.slf4j.Logger;
@@ -25,15 +26,30 @@ public class WritePDFToExcel {
     }
     final List<Map<String, String>> result = new ArrayList<>();
     File[] files = root.listFiles();
-    if (files != null) {
-      Stream.of(files).filter(file -> file.getName().contains(".pdf")).forEach(pdf -> {
-        ReadPDFWithPDFBox readPDFWithPDFBox = new ReadPDFWithPDFBox(pdf);
-        result.add(readPDFWithPDFBox.extractText());
-      });
+    List<File> pdfs = Stream.of(files).filter(file -> file.getName().contains(".pdf")).collect(
+        Collectors.toList());
+    int completedJobs = 0;
+    int sumJobs = pdfs.size();
+    for (File pdf : pdfs) {
+      ReadPDFWithPDFBox readPDFWithPDFBox = new ReadPDFWithPDFBox(pdf);
+      result.add(readPDFWithPDFBox.extractText());
+      String progress = MyProgressbar.buildProgressBar(completedJobs++, sumJobs);
+      System.out.print(progress);
+      try {
+        Thread.sleep(200);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      for (int j = 1; j <= 1000; j++) {
+        System.out.print("\b");
+      }
+
     }
+
     String[] headers = {"Name", "InvoiceCode", "InvoiceNum", "Money"};
     ApachePOIUtil
         .write(headers, result, new File(root.getAbsolutePath() + File.separator + "result.xlsx"));
+    System.out.print(MyProgressbar.buildDone());
   }
 
 }
