@@ -135,7 +135,8 @@
             </descriptorRefs>
             <archive>
               <manifest>
-                <mainClass>com.test.service.WritePDFToExcel</mainClass>
+                <!--<mainClass>com.test.service.WritePDFToExcel</mainClass>-->
+                <mainClass>com.test.service.App</mainClass>
               </manifest>
             </archive>
           </configuration>
