@@ -61,3 +61,7 @@ def fun3():
 
 fun3()
 print(a)  # 30
+
+
+str = ";".join(["1","2","3","4"])
+print(str)
