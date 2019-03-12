@@ -9,3 +9,5 @@ print(Fore.YELLOW + '██████░')
 print(Fore.GREEN + '⣿⣦⣀⣀')
 print(Style.RESET_ALL)
 print('back to normal now')
+
+name = input()
