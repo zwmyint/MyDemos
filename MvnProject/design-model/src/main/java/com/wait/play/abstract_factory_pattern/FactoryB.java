@@ -1,4 +1,4 @@
-package com.wait.play.abstract_factory;
+package com.wait.play.abstract_factory_pattern;
 
 public class FactoryB extends AFactory {
 

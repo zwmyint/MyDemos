@@ -1,4 +1,4 @@
-package com.wait.play.simple_factory_model;
+package com.wait.play.simple_factory_pattern;
 
 public class App {
 

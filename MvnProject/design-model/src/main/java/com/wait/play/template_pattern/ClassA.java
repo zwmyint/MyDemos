@@ -1,4 +1,4 @@
-package com.wait.play.template_model;
+package com.wait.play.template_pattern;
 
 public class ClassA extends TemplateModel{
 

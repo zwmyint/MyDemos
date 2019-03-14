@@ -1,4 +1,4 @@
-package com.wait.play.template_model;
+package com.wait.play.template_pattern;
 
 public abstract class TemplateModel {
   protected abstract void step1();
