@@ -10,4 +10,4 @@ print(Fore.GREEN + '⣿⣦⣀⣀')
 print(Style.RESET_ALL)
 print('back to normal now')
 
-name = input()
+input("Press any key to exit...")
