@@ -26,7 +26,7 @@ public class WritePDFToExcelTestCase {
   public void write() {
     try {
       File root = new File(resource.toURI());
-      WritePDFToExcel.write(root);
+      WritePDFToExcelApp.write(root);
     } catch (Exception e) {
       logger.error("Error!!!!");
     }

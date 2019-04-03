@@ -1,4 +1,4 @@
-package com.test.service;
+package com.test.utils;
 
 
 import static org.fusesource.jansi.Ansi.Color.BLUE;
