@@ -1,4 +1,4 @@
-package com.test.service;
+package com.test.service.utils;
 
 import com.test.utils.MyProgressbar;
 import java.io.PrintWriter;
