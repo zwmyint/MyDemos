@@ -37,7 +37,6 @@ public class JAXBTest {
     house.setAddress("SH");
     person.getProperties().add(car);
     person.getProperties().add(house);
-    a
     ClassLoader classLoader = getClass().getClassLoader();
     String path = classLoader.getResource("person.xml").getPath();
     logger.info(path);
