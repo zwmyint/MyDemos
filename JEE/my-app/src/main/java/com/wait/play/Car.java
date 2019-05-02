@@ -3,6 +3,7 @@ package com.wait.play;
 public class Car {
 
   private long id;
+  a
   private String name;
 
   public long getId() {

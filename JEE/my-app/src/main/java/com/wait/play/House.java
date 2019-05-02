@@ -4,6 +4,7 @@ package com.wait.play;
 public class House {
 
   private long id;
+  a
   private String address;
 
   public long getId() {
