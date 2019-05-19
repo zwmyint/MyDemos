@@ -1,4 +1,4 @@
-package com.test.service.utils;
+package com.my.service.utils;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -7,13 +7,12 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
 import org.junit.Test;
 
-import com.test.utils.LocalDateTimeUtil;
+import com.my.utils.LocalDateTimeUtil;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
 import static junit.framework.TestCase.assertEquals;

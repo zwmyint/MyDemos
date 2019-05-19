@@ -1,4 +1,4 @@
-package com.test.utils;
+package com.my.utils;
 
 
 public class MyProgressbar {

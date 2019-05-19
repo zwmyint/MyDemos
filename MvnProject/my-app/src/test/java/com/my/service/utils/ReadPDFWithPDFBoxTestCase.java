@@ -1,4 +1,4 @@
-package com.test.service.utils;
+package com.my.service.utils;
 
 import java.io.File;
 import java.net.URL;
@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.test.service.ReadPDFWithPDFBox;
+import com.my.service.ReadPDFWithPDFBox;
 
 public class ReadPDFWithPDFBoxTestCase {
 

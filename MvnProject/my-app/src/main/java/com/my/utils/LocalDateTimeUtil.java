@@ -1,4 +1,4 @@
-package com.test.utils;
+package com.my.utils;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -12,8 +12,6 @@ import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.test.service.ReadPDFWithPDFBox;
 
 public class LocalDateTimeUtil {
 

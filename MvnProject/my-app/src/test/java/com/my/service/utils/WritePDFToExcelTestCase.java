@@ -1,4 +1,4 @@
-package com.test.service.utils;
+package com.my.service.utils;
 
 import java.io.File;
 import java.net.URL;
@@ -8,8 +8,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.test.service.ReadPDFWithPDFBox;
-import com.test.service.WritePDFToExcelApp;
+import com.my.service.ReadPDFWithPDFBox;
+import com.my.service.WritePDFToExcelApp;
 
 public class WritePDFToExcelTestCase {
 

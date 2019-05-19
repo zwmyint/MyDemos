@@ -1,6 +1,6 @@
-package com.test.utils;
+package com.my.utils;
 
-import com.test.service.ReadPDFWithPDFBox;
+import com.my.service.ReadPDFWithPDFBox;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.test.service;
+package com.my.service;
 
 import java.awt.geom.Rectangle2D;
 import java.io.File;

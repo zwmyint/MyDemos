@@ -1,6 +1,6 @@
-package com.test.service;
+package com.my.service;
 
-import com.test.utils.ColorProgressBarUtil;
+import com.my.utils.ColorProgressBarUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

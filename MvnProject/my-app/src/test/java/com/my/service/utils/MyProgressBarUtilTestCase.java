@@ -1,6 +1,6 @@
-package com.test.service.utils;
+package com.my.service.utils;
 
-import com.test.utils.MyProgressbar;
+import com.my.utils.MyProgressbar;
 import java.io.PrintWriter;
 
 import org.junit.Test;

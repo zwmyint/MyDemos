@@ -1,4 +1,4 @@
-package com.test.service.java8;
+package com.my.service.java8;
 
 
 import java.util.List;
