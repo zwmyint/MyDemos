@@ -1,4 +1,4 @@
-package com.my.service.utils;
+package com.my.service.java8;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -17,7 +17,7 @@ import com.my.utils.LocalDateTimeUtil;
 import static java.time.temporal.ChronoUnit.MINUTES;
 import static junit.framework.TestCase.assertEquals;
 
-public class LocalDateTimeUtilTestCase {
+public class MyLocalDateTimeUtilTestCase {
 
   @Test
   public void parse() {

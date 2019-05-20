@@ -14,7 +14,7 @@ import org.junit.Test;
  * 5. A list of Optional value or a map with Optional key is dubious
  *    Instead of List<Optional<String>>, just have List<String>
  */
-public class MyOptional {
+public class MyOptionalTestCase {
 
   @Test
   public void fun() {

@@ -4,27 +4,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.IntSummaryStatistics;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.junit.Before;
+import com.my.bean.Person;
+
 import org.junit.Test;
 
 
 /**
  * 1. Stream is immutable - all operations yield new streams (or return result)
  */
-public class StreamTestCase {
+public class MyStreamTestCase {
 
   List<String> people = Arrays.asList("Tom", "Jack");
   List<String> phones = Arrays.asList("SumSang", "Sony");
-  List<Integer> numbers = Arrays.asList(1, 12, 34, 35, 23, 29, 45, 50, 45, 50, 50);
-
-
-  @Before
-  public void init() {
-  }
+  List<Integer> numbers = Arrays.asList(1, 12, 30, 30, 3, 2, 4, 5, 4, 5);
+  List<Person> personList = new ArrayList<>();
+  Stream<Locale> localeStream = Stream.of(Locale.getAvailableLocales());
 
   @Test
   public void fun() {
@@ -39,7 +40,7 @@ public class StreamTestCase {
     people.stream().map(e -> e.substring(0, 3));
   }
 
-  //  Use flatMap to transform stream
+  // Use flatMap to transform stream
   @Test
   public void flatMap() {
     List<List<String>> lists = new ArrayList<>();
@@ -95,6 +96,78 @@ public class StreamTestCase {
     intSummaryStatistics.getMin();
     intSummaryStatistics.getSum();
   }
+
+  @Test
+  public void toMap() {
+    personList.stream().collect(Collectors.toMap(Person::getId, Person::getName));
+  }
+
+
+  /**
+   * Simplest form repeats applying a binary function. (x, y) -> x operate y
+   */
+  @Test
+  public void reduce() {
+    Integer sum = numbers.stream().reduce(0, (x, y) -> x + y);
+    System.out.println(sum);
+
+    Integer product = numbers.stream().reduce(1, (x, y) -> x * y);
+    System.out.println(product);
+
+    Integer totalWordsLength = phones.stream()
+        .reduce(0, (total, word) -> total + word.length(), (total1, total2) -> total1 + total2);
+    System.out.println(totalWordsLength);
+
+    Integer totalWordsLengthSimple = phones.stream().map(String::length).reduce(0, (x, y) -> x + y);
+    System.out.println(totalWordsLengthSimple);
+
+  }
+
+
+  @Test
+  public void groupby() {
+    Map<String, List<Locale>> locales = localeStream
+        .collect(Collectors.groupingBy(Locale::getCountry));
+    locales.forEach((key, value) -> {
+      value.stream().forEach(v -> System.out.println(v.getLanguage()));
+    });
+  }
+
+  @Test
+  public void partitioningby() {
+    Map<Boolean, List<Locale>> locales = localeStream
+        .collect(Collectors.partitioningBy(locale -> locale.getLanguage().equals("en")));
+    locales.forEach((key, value) -> {
+      System.out.println(key);
+      value.stream().forEach(v -> System.out.println(v.getLanguage()));
+      System.out.println("----");
+    });
+  }
+
+
+  @Test
+  public void usePrimitiveTypeStream() {
+    /**
+     * IntStream, LongStream, DoubleStream
+     */
+  }
+
+  @Test
+  public void parallelStream() {
+    /**
+     * 1. Parallel streams compute stream results concurrently
+     * 2. Faster with large in-memory stream
+     */
+    Stream<String> parallel = phones.parallelStream();
+    Optional<String> any = parallel.findAny();
+    System.out.println(any.get());
+
+    Stream<String> stream = phones.stream();
+    Optional<String> other = stream.findAny();
+    System.out.println(other.get());
+  }
+
+
 
 
 }
