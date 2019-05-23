@@ -97,7 +97,7 @@ public class MyInputAndOutput {
       Files.delete(file2Path);
 
       Path file3Path = Paths.get(resources + "file3.txt");
-      Files.write(file3Path, lines, StandardOpenOption.TRUNCATE_EXISTING);
+      Files.write(file3Path, lines, StandardOpenOption.CREATE);
       Files.delete(file3Path);
     } catch (Exception e) {
       e.printStackTrace();
@@ -137,7 +137,6 @@ public class MyInputAndOutput {
     }
   }
 
-  @Test
   public void walk() {
     try {
       //Copy a directory tree
