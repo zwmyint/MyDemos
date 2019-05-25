@@ -2,8 +2,12 @@ package com.my.service.java8;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,6 +16,7 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.StandardOpenOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -159,6 +164,40 @@ public class MyInputAndOutput {
           return FileVisitResult.CONTINUE;
         }
       });
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  @Test
+  public void zip() {
+    try {
+      Path zipFilePath = Paths.get(resources + "4zip/myZip.zip");
+      Files.deleteIfExists(zipFilePath);
+      URI uri = new URI("jar", zipFilePath.toUri().toString(), null);
+      try (FileSystem zipfs = FileSystems
+          .newFileSystem(uri, Collections.singletonMap("create", true))) {
+        Path form = Paths.get(resources + "test.text");
+        String to = "test.text";
+        Files.copy(form, zipfs.getPath("/").resolve(to));
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  @Test
+  public void java11() {
+    String str = "java11\nAPIS";
+    str.lines().forEach(s -> System.out.println(s));
+
+    //Trims Unicode whitespace
+    str.strip();
+
+    try {
+      Files.readString(Paths.get(resources + "test.text"));
+      //Provide null Stream
+      OutputStream.nullOutputStream();
     } catch (IOException e) {
       e.printStackTrace();
     }
