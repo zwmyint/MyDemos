@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpClient.Redirect;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
@@ -19,6 +23,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -186,11 +191,45 @@ public class MyInputAndOutput {
     }
   }
 
+
+  public void httpClient() {
+    //replace fussy URLConnection/HttpURLConnection
+
+    //1. build a client
+    HttpClient client = HttpClient.newBuilder().followRedirects(Redirect.ALWAYS).build();
+
+    //2. build a request
+    HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create("https://www.google.com"))
+        .GET().build();
+
+    //3. get and handle response
+    try {
+      HttpResponse<String> response = client
+          .send(httpRequest, HttpResponse.BodyHandlers.ofString());
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    //4. Asynchronous processing
+    client.sendAsync(httpRequest, HttpResponse.BodyHandlers.ofString())
+        .completeOnTimeout(null, 10, TimeUnit.SECONDS).thenAccept(response -> {
+    });
+
+
+  }
+
+
+
+
+
+
+
+
   @Test
   public void java11() {
     String str = "java11\nAPIS";
     str.lines().forEach(s -> System.out.println(s));
-
     //Trims Unicode whitespace
     str.strip();
 
