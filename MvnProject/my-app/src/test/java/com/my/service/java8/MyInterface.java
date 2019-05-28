@@ -13,6 +13,14 @@ public interface MyInterface {
   }
 
   int size();
+
+  private String getResult() {
+    return "result";
+  }
+
+  default String getLastResult() {
+    return this.getResult();
+  }
 }
 
 interface MySecondInterface {
