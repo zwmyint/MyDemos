@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 
 import org.junit.Test;
 
+//[ref-doc]: https://dzone.com/articles/creating-custom-annotations-in-java
+
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @interface CustomName {
