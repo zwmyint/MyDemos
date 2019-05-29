@@ -15,72 +15,71 @@ import org.junit.Test;
 
 //[ref-doc]: https://dzone.com/articles/creating-custom-annotations-in-java
 
-@Target(ElementType.FIELD)
+
+/**
+ * 1. Define the custom annotation
+ */
+@Target({ElementType.TYPE, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@interface CustomName {
+@interface ToString {
 
-  String value() default "";
+  boolean includeName() default true;
 }
 
-public class MyAnnotationTestCase {
 
-  @Test
-  public void customTeacher() throws Exception {
-    Teacher teacher = new Teacher();
-    teacher.setName("Li Ming");
-    new PrintTeacher().serialize(teacher);
+/**
+ * 2. Implement the custom annotation
+ */
 
-  }
 
-}
+class ToStringFactory {
 
-class Teacher {
-
-  @CustomName("Good")
-  private String name;
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-}
-
-class PrintTeacher {
-
-  private static String getSerializedKey(Field field) {
-    String annotationValue = field.getAnnotation(CustomName.class).value();
-    if (annotationValue.isEmpty()) {
-      return field.getName();
-    } else {
-      return annotationValue;
-    }
-  }
-
-  public String serialize(Object object) throws Exception {
-    try {
-      Class<?> objectClass = requireNonNull(object).getClass();
-      Map<String, String> jsonElements = new HashMap<>();
-      for (Field field : objectClass.getDeclaredFields()) {
-        field.setAccessible(true);
-        if (field.isAnnotationPresent(CustomName.class)) {
-          jsonElements.put(getSerializedKey(field), (String) field.get(object));
-        }
+  public static String customToString(Object object) throws Exception {
+    Map<String, String> result = new HashMap();
+    Class<?> clazz = requireNonNull(object).getClass();
+    ToString classAnnotation = clazz.getAnnotation(ToString.class);
+    for (Field field : clazz.getDeclaredFields()) {
+      field.setAccessible(true);
+      ToString fieldAnnotation = field.getAnnotation(ToString.class);
+      if (fieldAnnotation.includeName()) {
+        result.put(field.getName(), (String) field.get(object));
       }
-      System.out.println(result(jsonElements));
-      return result(jsonElements);
-    } catch (IllegalAccessException e) {
-      throw e;
     }
+    return result(result);
   }
 
-  private String result(Map<String, String> jsonMap) {
-    String elementsString = jsonMap.entrySet()
+  private static String result(Map<String, String> map) {
+    String elementsString = map.entrySet()
         .stream()
         .map(entry -> "\"" + entry.getKey() + "\":\"" + entry.getValue() + "\"")
         .collect(Collectors.joining(","));
     return "{" + elementsString + "}";
   }
 }
+
+public class MyAnnotationTestCase {
+
+  @Test
+  public void customToString() throws Exception {
+    Point pointWithName = new Point("12.3", "11.3", "Point1");
+    System.out.println(ToStringFactory.customToString(pointWithName));
+  }
+
+}
+
+class Point {
+
+  @ToString
+  private String x;
+  @ToString
+  private String y;
+  @ToString(includeName = true)
+  private String name;
+
+  public Point(String x, String y, String name) {
+    this.x = x;
+    this.y = y;
+    this.name = name;
+  }
+}
+
