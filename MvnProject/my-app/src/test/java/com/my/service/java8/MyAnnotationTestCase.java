@@ -15,6 +15,10 @@ import org.junit.Test;
 
 //[ref-doc]: https://dzone.com/articles/creating-custom-annotations-in-java
 
+// 1. Processing Annotations at RunTime
+// 2. Modifying Class at Load Time used for dependence injection, persistence and so on.
+// 3. Wish ASM library to do Bytecode engineering
+
 
 /**
  * 1. Define the custom annotation
@@ -22,7 +26,6 @@ import org.junit.Test;
 @Target({ElementType.TYPE, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @interface ToString {
-
   boolean includeName() default true;
 }
 
@@ -79,6 +82,30 @@ class Point {
   public Point(String x, String y, String name) {
     this.x = x;
     this.y = y;
+    this.name = name;
+  }
+
+  public String getX() {
+    return x;
+  }
+
+  public void setX(String x) {
+    this.x = x;
+  }
+
+  public String getY() {
+    return y;
+  }
+
+  public void setY(String y) {
+    this.y = y;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
     this.name = name;
   }
 }
