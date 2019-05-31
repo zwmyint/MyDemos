@@ -14,6 +14,7 @@ public interface MyInterface {
 
   int size();
 
+  //Java9
   private String getResult() {
     return "result";
   }
