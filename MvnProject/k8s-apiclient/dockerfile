@@ -1,0 +1,3 @@
+FROM openjdk:12-jdk-alpine
+ADD config.yaml app.jar ./
+ENTRYPOINT ["java","-jar","./app.jar"]
