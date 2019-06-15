@@ -1,10 +1,7 @@
 package k8s;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
-import java.io.InputStream;
-import java.util.Scanner;
 
 import io.kubernetes.client.ApiClient;
 import io.kubernetes.client.Configuration;
@@ -18,11 +15,6 @@ public class K8sApiClient {
 
   public static void main(String[] args) {
     try {
-      InputStream inputStream = new FileInputStream("." + File.separator + "config.yaml");
-      Scanner sc = new Scanner(inputStream);
-      while (sc.hasNext()) {
-        System.out.println(sc.nextLine());
-      }
       FileReader yamlFile = new FileReader(new File("." + File.separator + "config.yaml"));
       KubeConfig kubeConfig = KubeConfig.loadKubeConfig(yamlFile);
       ApiClient client = Config.fromConfig(kubeConfig);
