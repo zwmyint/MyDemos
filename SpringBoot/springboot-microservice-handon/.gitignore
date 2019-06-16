@@ -20,5 +20,3 @@ files/
 
 target/
 
-src/main/resources/static/bs4-vue/node_modules/
-src/main/resources/static/bs4-vue/package-lock.json
