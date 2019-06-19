@@ -1,21 +1,36 @@
 # Springboot Microservice With Vue
 
 
-## VUE Environment Configuration
+## VUE Material Env Setup
+
+- Setup taobao npm registry
 
 ```
-//1. 设置淘宝镜像
 npm config set registry http://registry.npm.taobao.org/
+```
 
-//2. 全局安装nuxt [参考](https://nuxtjs.org/guide/installation)
-npm i nuxt -g
-npm i nuxt --save
-
-//3. 使用npx创建项目
-npx create-nuxt-app <project-name>
-
+- Vue CLI Installation [link](https://cli.vuejs.org/guide/installation.html)
 
 ```
+npm install -g @vue/cli
+```
+
+
+
+## Create awesome vue material project
+
+```
+mkdir <project-dir>
+vue create .
+```
+
+- Vue Material Setup [link](https://github.com/vuematerial/vue-material)
+
+```
+npm install vue-material --save
+```
+
+- 
 
 
 ## Spring Reactive Framework
