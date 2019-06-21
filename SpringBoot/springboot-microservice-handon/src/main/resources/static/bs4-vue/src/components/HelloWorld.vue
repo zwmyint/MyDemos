@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <div>
-      <small>Vue material</small>
+      <md-icon>menu</md-icon>
       <md-button class="md-raised">Default</md-button>
       <md-button class="md-raised" :md-ripple="false">Ripple Off</md-button>
       <md-button class="md-raised md-primary">Primary</md-button>
@@ -15,10 +15,8 @@
   import Vue from 'vue'
   import VueMaterial from 'vue-material'
   import 'vue-material/dist/vue-material.min.css'
-  import 'vue-material/dist/theme/default.css' // This line here
-  import {MdButton} from 'vue-material/dist/components'
-
-  Vue.use(MdButton)
+  import 'vue-material/dist/theme/default.css'
+  import 'material-design-icons/iconfont/material-icons.css'
   Vue.use(VueMaterial)
 
   export default {
