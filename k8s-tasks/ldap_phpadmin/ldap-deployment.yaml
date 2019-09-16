@@ -1,0 +1,117 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: openldap
+  labels:
+    app: openldap-demo
+spec:
+  ports:
+  - port: 389
+    name: p-389
+  - port: 636
+    name: p-636
+  selector:
+    app: openldap-demo
+    tier: backend
+  clusterIP: None
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: 
+  name: openldap-pv-claim
+  labels:
+    app: openldap-demo
+spec:
+  storageClassName: manual
+  accessModes: 
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 200M
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: 
+  name: openldap-slapd-pv-claim
+  labels:
+    app: openldap-demo
+spec:
+  storageClassName: manual
+  accessModes: 
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 200M
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: openldap-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 200M
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data/ldapdb"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: openldap-slapd-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 200M
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data/slapd/config/slapd.d"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openldap
+  labels:
+    app: openldap-demo
+spec:
+  selector:
+    matchLabels:
+      app: openldap-demo
+      tier: backend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: openldap-demo
+        tier: backend
+    spec:
+      containers:
+      - image: osixia/openldap:1.2.2
+        name: openldap
+        ports:
+        - containerPort: 389
+          name: openldap-389
+          protocol: TCP
+        - containerPort: 636
+          name: openldap-636
+          protocol: TCP
+        volumeMounts:
+        - name: openldap-persistent-storage
+          mountPath: /var/lib/ldap
+        - name: openldap-slapd-persistent-storage
+          mountPath: /etc/ldap/slapd.d
+      volumes:
+      - name: openldap-persistent-storage
+        persistentVolumeClaim:
+          claimName: openldap-pv-claim
+      - name: openldap-slapd-persistent-storage
+        persistentVolumeClaim:
+          claimName: openldap-slapd-pv-claim
