@@ -8,9 +8,9 @@ def main():
     # Add the areas you love
     areas = ['华沙一村', '园西一居', '临丰小区', '青夏小区', '上浦小区']
     # Add the absolute path of the index.html on your laptop
-    indexPath = 'C:/Users/JiaJiaGui/Desktop/New folder/PYTHON/frontend/index.html'
+    indexPath = 'C:/AAA/Git/MyDemos/Python3/soufangwang/frontend/index.html'
     # Config the absolute path of geckodriver.exe
-    geckodriverPath = r'C:/Users/JiaJiaGui/Desktop/New folder/PYTHON/geckodriver.exe'
+    geckodriverPath = r'./drivers/geckodriver.exe'
     price = ''
     for area in areas:
         price = price + getPriceByAreaName(area) + ','

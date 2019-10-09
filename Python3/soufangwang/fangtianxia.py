@@ -2,6 +2,7 @@ import requests
 import json
 from pyquery import PyQuery as pq
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 from datetime import datetime
 from requests.exceptions import HTTPError
 from fileutil import append
@@ -15,11 +16,13 @@ def __splitAreaCode(url):
     code = url.replace('https://fangjia.fang.com/process/sh/','').replace('.htm', '')
     return code
 
-#return areaName
+# return areaName
+
+
 def getAreaCode(areaName):
     try:
         response = requests.get(__url, params={
-            'projname': areaName, 'strnewcode':'', 'strcity':'', 'boolnewsearch':'True','_csrf':'4b67zSz1-y-qYKvkBb19Wa26KtX7eiwIDPSY'
+            'projname': areaName, 'strnewcode': '', 'strcity': '', 'boolnewsearch': 'True', '_csrf': '4b67zSz1-y-qYKvkBb19Wa26KtX7eiwIDPSY'
         })
         code = response.status_code
         if(code == 200):
@@ -34,6 +37,7 @@ def getAreaCode(areaName):
         print('Success!')
 
 # return price array
+
 
 def getAreaPrice(areaCode):
     try:
@@ -51,56 +55,50 @@ def getAreaPrice(areaCode):
         print(f'Other error occurred: {err}')
     else:
         print('Success!')
-    
+
+
+def __getChenJiaoFromHtml(html, count, result, split):
+    d = pq(html)
+    if(count == 0):
+        th = d('div.dealSent table tr th').items()
+        for i in th:
+            result += str(i.text().replace('\n', '&')) + ','
+        result = result[:-1]
+        result += '\n'
+    td = d('div.dealSent table tr td').items()
+    for j in td:
+        split = split + 1
+        result += str(j.text().replace('\n', ' ')) + ','
+        if(split > 0 and split % 6 == 0):
+            result += '\n'
+    return result
 
 def getChengJiaoByName(name):
-    url = "https://yuanxierju.fang.com/chengjiao/"
-    geckodriverPath = r'C:/Users/JiaJiaGui/Desktop/New folder/PYTHON/geckodriver.exe'
-    
+    url = "https://huashayicun.fang.com/chengjiao/"
+    geckodriverPath = r'./drivers//geckodriver.exe'
+
     try:
         driver = webdriver.Firefox(executable_path=geckodriverPath)
         driver.get(url)
-        element = driver.find_element_by_id("ctl00_hlk_next")
         count = 0
         result = ''
         split = 0
-        if(element):
-            while(element):
-                html = driver.page_source
-                d = pq(html)
-                if(count == 0):
-                    th = d('div.dealSent table tr th').items()
-                    for i in th:
-                        result += str(i.text()) + ','
-                    result = result[:-1]
-                    result += '\n'
-                td = d('div.dealSent table tr td').items()
-                for j in td:
-                    split = split + 1
-                    result += str(j.text()) + ','
-                    if(split > 0 and split % 5 == 0):
-                        result += '\n'
-                count = count + 1
-                element.click()
+        result = __getChenJiaoFromHtml(driver.page_source, count, result, split)
+        element = driver.find_element_by_id("ctl00_hlk_next")
+        while(element):
+            element.click()
+            count = count + 1
+            result = __getChenJiaoFromHtml(driver.page_source, count, result, split)
+            element = driver.find_element_by_id("ctl00_hlk_next")
+    except NoSuchElementException:
+        print('There is no  more data! {}'.format(driver.current_url))
     finally:
         driver.close()
         append('./data/data.txt', result)
-    
-    
-    
 
 
-#return 2019-10
-def covertTimestamp2Str(timestamp):
-    date_time = datetime.fromtimestamp(timestamp)
-    return date_time.strftime("%Y-%m")
-
-
-def getPriceByAreaName(areaName) : 
+def getPriceByAreaName(areaName):
     areaCode = getAreaCode(areaName)
     price = getAreaPrice(areaCode)
     result = '"' + areaName + '" : ' + price
     return result
-
-
-
