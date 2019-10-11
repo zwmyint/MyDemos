@@ -1,8 +1,38 @@
 from selenium import webdriver
 from fangtianxia import getPriceByAreaName
+from fileutil import read
 from fileutil import write
+import json
+from datetimeutil import format
 
 
+def createIndexHtml(jsonData):
+    colors = ['#FF6384', '#36A2EB', '#9C27B0', '#673AB7', '#3F51B5', '#009688', '#4CAF50', '#AED581', '#EEFF41', '#FF8A65', '#FFEB3B']
+    dataAvg = {}
+    datasets = []
+    labels = []
+    count = 0;
+    for key in jsonData:
+        dataset = {}
+        data = []
+        dataset['label'] = key
+        dataset['data'] = data
+        dataset['backgroundColor'] = colors[count]
+        dataset['borderColor'] = colors[count]
+        dataset['fill'] = False
+        for value in jsonData[key]:
+            dataTime = value[0]
+            price = value[1]
+            data.append(str(price))
+            if count==0 :
+                labels.append(str(format(dataTime)))
+        count+=1
+        datasets.append(dataset)
+    dataAvg['datasets'] = datasets
+    dataAvg['labels'] = labels
+    htmlContent = read('./frontend/vm/index.vm')
+    htmlContent = htmlContent.replace('${dataAvg}', json.dumps(dataAvg))
+    write('./frontend/index.html', htmlContent)
 
 def main():
     # Add the areas you love
@@ -17,8 +47,8 @@ def main():
     price = price[:-1]
     filename = './data/data.json'
     content = '{' + price + '}'
-    write(filename, content)
-    
+    jsonObj = json.loads(content)
+    createIndexHtml(jsonObj)
     driver = webdriver.Firefox(executable_path=geckodriverPath)
     driver.get("file:///" + indexPath)
 
