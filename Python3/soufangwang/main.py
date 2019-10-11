@@ -6,12 +6,14 @@ import json
 from datetimeutil import format
 
 
-def createIndexHtml(jsonData):
+geckodriverPath = r'./drivers/geckodriver.exe'
+
+def __createIndexHtml(jsonData):
     colors = ['#FF6384', '#36A2EB', '#9C27B0', '#673AB7', '#3F51B5', '#009688', '#4CAF50', '#AED581', '#EEFF41', '#FF8A65', '#FFEB3B']
     dataAvg = {}
     datasets = []
     labels = []
-    count = 0;
+    count = 0
     for key in jsonData:
         dataset = {}
         data = []
@@ -34,23 +36,23 @@ def createIndexHtml(jsonData):
     htmlContent = htmlContent.replace('${dataAvg}', json.dumps(dataAvg))
     write('./frontend/index.html', htmlContent)
 
-def main():
+def getAreasAvgPrice():
     # Add the areas you love
     areas = ['华沙一村', '园西一居', '临丰小区', '青夏小区', '上浦小区']
     # Add the absolute path of the index.html on your laptop
     indexPath = 'C:/AAA/Git/MyDemos/Python3/soufangwang/frontend/index.html'
-    # Config the absolute path of geckodriver.exe
-    geckodriverPath = r'./drivers/geckodriver.exe'
     price = ''
     for area in areas:
         price = price + getPriceByAreaName(area) + ','
     price = price[:-1]
-    filename = './data/data.json'
     content = '{' + price + '}'
     jsonObj = json.loads(content)
-    createIndexHtml(jsonObj)
+    __createIndexHtml(jsonObj)
     driver = webdriver.Firefox(executable_path=geckodriverPath)
     driver.get("file:///" + indexPath)
+
+def main():
+    getAreasAvgPrice()
 
 
 if __name__ == '__main__':
