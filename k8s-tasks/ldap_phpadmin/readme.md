@@ -12,6 +12,14 @@
 3. Do not forget spec the env named PHPLDAPADMIN_LDAP_HOSTS and it value should be openldap, it should be the service name.
 
 
+## Docker Command
+
+```
+docker run --rm -p 30567:389 -p 636:636 --name my-openldap-container -v /mnt/data/slapd/config/slapd.d:/etc/ldap/slapd.d -v /mnt/data/ldapdb:/var/lib/ldap --detach osixia/openldap:1.2.5
+
+```
+
+
 ## Useful Commands
 
 ```
