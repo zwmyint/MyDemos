@@ -9,6 +9,7 @@ from fileutil import append
 
 __city = 'sh'
 __years = 3
+__geckodriverPath = r'./drivers//geckodriver.exe'
 __url = 'https://fangjia.fang.com/fangjia/suggestion/transfer/' + __city
 
 
@@ -17,9 +18,7 @@ def __splitAreaCode(url):
     return code
 
 # return areaName
-
-
-def getAreaCode(areaName):
+def __getAreaCode(areaName):
     try:
         response = requests.get(__url, params={
             'projname': areaName, 'strnewcode': '', 'strcity': '', 'boolnewsearch': 'True', '_csrf': '4b67zSz1-y-qYKvkBb19Wa26KtX7eiwIDPSY'
@@ -39,7 +38,7 @@ def getAreaCode(areaName):
 # return price array
 
 
-def getAreaPrice(areaCode):
+def __getAreaPrice(areaCode):
     try:
         response = requests.get('https://fangjia.fang.com/fangjia/common/ajaxdetailtrenddata/' + __city, params={
             'dataType': 'proj', 'projcode': areaCode, 'year': __years
@@ -57,48 +56,52 @@ def getAreaPrice(areaCode):
         print('Success!')
 
 
-def __getChenJiaoFromHtml(html, count, result, split):
+def __getChenJiaoFromHtml(html, count, result):
     d = pq(html)
     if(count == 0):
         th = d('div.dealSent table tr th').items()
+        result['label'] = []
+        result['items'] = []
         for i in th:
-            result += str(i.text().replace('\n', '&')) + ','
-        result = result[:-1]
-        result += '\n'
+            result['label'].append(str(i.text()))
     td = d('div.dealSent table tr td').items()
+    split = 0
     for j in td:
-        split = split + 1
-        result += str(j.text().replace('\n', ' ')) + ','
-        if(split > 0 and split % 6 == 0):
-            result += '\n'
-    return result
+        if(split == 0) :
+            item = []
+        item.append(str(j.text().replace('\n', ' ')))
+        if (split > 0 and split % 5 == 0):
+            result['items'].append(item)
+            split = 0
+        else:
+            split += 1
+
 
 def getChengJiaoByName(name):
     url = "https://huashayicun.fang.com/chengjiao/"
-    geckodriverPath = r'./drivers//geckodriver.exe'
-
+    #url = "https://yuanxierju.fang.com/chengjiao/"
+    result = {}
     try:
-        driver = webdriver.Firefox(executable_path=geckodriverPath)
+        driver = webdriver.Firefox(executable_path=__geckodriverPath)
         driver.get(url)
         count = 0
-        result = ''
-        split = 0
-        result = __getChenJiaoFromHtml(driver.page_source, count, result, split)
+        __getChenJiaoFromHtml(driver.page_source, count, result)
         element = driver.find_element_by_id("ctl00_hlk_next")
         while(element):
             element.click()
             count = count + 1
-            result = __getChenJiaoFromHtml(driver.page_source, count, result, split)
+            __getChenJiaoFromHtml(driver.page_source, count, result)
             element = driver.find_element_by_id("ctl00_hlk_next")
     except NoSuchElementException:
         print('There is no  more data! {}'.format(driver.current_url))
     finally:
         driver.close()
-        append('./data/data.txt', result)
+        print(len(result['items']))
+        append('./data/data.txt', json.dumps(result))
 
 
 def getPriceByAreaName(areaName):
-    areaCode = getAreaCode(areaName)
-    price = getAreaPrice(areaCode)
+    areaCode = __getAreaCode(areaName)
+    price = __getAreaPrice(areaCode)
     result = '"' + areaName + '" : ' + price
     return result

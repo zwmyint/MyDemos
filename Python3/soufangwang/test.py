@@ -10,9 +10,9 @@ def indexHtml(jsonStr):
 
 
 def main():
-    #getChengJiaoByName('')
+    getChengJiaoByName('')
     #indexHtml('')
-    print(format(1475251200000))
+    #print(format(1475251200000))
    
 
 if __name__ == '__main__':
