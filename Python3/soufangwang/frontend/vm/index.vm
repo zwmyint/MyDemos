@@ -8,7 +8,13 @@
     <title>Document</title>
     <script src="./js/chart.js"></script>
     <script src="./js/jquery.1.11.3.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/datatables.min.js"></script>
+    <script src="./js/datatable.bs4.min.js"></script>
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/datatables.min.css">
+    <link rel="stylesheet" href="./css/datatables.bs4.min.css">
 </head>
 
 <body>
