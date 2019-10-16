@@ -1,4 +1,4 @@
-from fangtianxia import getChengJiaoByName
+from fangtianxia import getChengjiao
 from fileutil import read
 import json
 from datetimeutil import format
@@ -9,15 +9,13 @@ def indexHtml(jsonStr):
     print(content)
 
 
+
+
+
 def main():
-    result = {}
-    result['count'] = 0
-    areaNames = ['yuanxierju', 'huashayicun']
-    for name in areaNames:
-        getChengJiaoByName(name, result)
-    print(result)
     #indexHtml('')
     #print(format(1475251200000))
+    getChengjiao([])
    
 
 if __name__ == '__main__':

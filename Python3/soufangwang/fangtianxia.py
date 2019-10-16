@@ -60,11 +60,11 @@ def __getChenJiaoFromHtml(html, result, name):
     d = pq(html)
     if(result['count'] == 0):
         th = d('div.dealSent table tr th').items()
-        result['label'] = []
+        result['labels'] = []
         result['items'] = []
         for i in th:
-            result['label'].append({'title' : str(i.text())})
-        result['label'].insert(0, {'title' : '小区名字'})
+            result['labels'].append({'title' : str(i.text())})
+        result['labels'].insert(0, {'title' : '小区名字'})
     td = d('div.dealSent table tr td').items()
     split = 0
     for j in td:
@@ -79,10 +79,9 @@ def __getChenJiaoFromHtml(html, result, name):
             split += 1
 
 
-def getChengJiaoByName(name, result):
+def __getChengJiaoByName(name, driver, result):
     url = "https://" + name + ".fang.com/chengjiao/"
     try:
-        driver = webdriver.Firefox(executable_path=__geckodriverPath)
         driver.get(url)
         __getChenJiaoFromHtml(driver.page_source, result, name)
         element = driver.find_element_by_id("ctl00_hlk_next")
@@ -94,12 +93,31 @@ def getChengJiaoByName(name, result):
     except NoSuchElementException:
         print('There is no  more data! {}, total: {}'.format(driver.current_url, len(result['items'])))
     finally:
-        driver.close()
-        #print(json.dumps(result))
+        pass
 
-
-def getPriceByAreaName(areaName):
+def __getPriceByAreaName(areaName):
     areaCode = __getAreaCode(areaName)
     price = __getAreaPrice(areaCode)
     result = '"' + areaName + '" : ' + price
     return result
+
+def getAvgPrice(areaNames):
+    price = ''
+    for area in areaNames:
+        price = price + __getPriceByAreaName(area) + ','
+    price = price[:-1]
+    content = '{' + price + '}'
+    dataAvg = json.loads(content)
+    return dataAvg
+
+
+def getChengjiao(areaNames):
+    result = {}
+    result['count'] = 0
+    try:
+        driver = webdriver.Firefox(executable_path=__geckodriverPath)
+        for name in areaNames:
+            __getChengJiaoByName(name, driver, result)
+    finally:
+        driver.close()
+    return json.dumps(result)

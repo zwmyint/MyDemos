@@ -26,6 +26,10 @@
         <div class="chengjiao">
             <table id="chengjiao_tb" class="table table-hover"></table>
         </div>
+        <footer class="container">
+            <p class="float-right"><a href="#">Back to top</a></p>
+            <p>© 2017-2019 Company, Inc.</p>
+        </footer>
     </div>
     
 
