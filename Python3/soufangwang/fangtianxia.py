@@ -93,10 +93,9 @@ def getChengJiaoByName(name):
             __getChenJiaoFromHtml(driver.page_source, count, result)
             element = driver.find_element_by_id("ctl00_hlk_next")
     except NoSuchElementException:
-        print('There is no  more data! {}'.format(driver.current_url))
+        print('There is no  more data! {}, total: {}'.format(driver.current_url, len(result['items'])))
     finally:
         driver.close()
-        print(len(result['items']))
         append('./data/data.txt', json.dumps(result))
 
 
