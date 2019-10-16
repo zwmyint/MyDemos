@@ -10,7 +10,12 @@ def indexHtml(jsonStr):
 
 
 def main():
-    getChengJiaoByName('')
+    result = {}
+    result['count'] = 0
+    areaNames = ['yuanxierju', 'huashayicun']
+    for name in areaNames:
+        getChengJiaoByName(name, result)
+    print(result)
     #indexHtml('')
     #print(format(1475251200000))
    

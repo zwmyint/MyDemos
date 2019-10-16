@@ -56,14 +56,15 @@ def __getAreaPrice(areaCode):
         print('Success!')
 
 
-def __getChenJiaoFromHtml(html, count, result):
+def __getChenJiaoFromHtml(html, result, name):
     d = pq(html)
-    if(count == 0):
+    if(result['count'] == 0):
         th = d('div.dealSent table tr th').items()
         result['label'] = []
         result['items'] = []
         for i in th:
-            result['label'].append(str(i.text()))
+            result['label'].append({'title' : str(i.text())})
+        result['label'].insert(0, {'title' : '小区名字'})
     td = d('div.dealSent table tr td').items()
     split = 0
     for j in td:
@@ -71,32 +72,30 @@ def __getChenJiaoFromHtml(html, count, result):
             item = []
         item.append(str(j.text().replace('\n', ' ')))
         if (split > 0 and split % 5 == 0):
+            item.insert(0, name)
             result['items'].append(item)
             split = 0
         else:
             split += 1
 
 
-def getChengJiaoByName(name):
-    url = "https://huashayicun.fang.com/chengjiao/"
-    #url = "https://yuanxierju.fang.com/chengjiao/"
-    result = {}
+def getChengJiaoByName(name, result):
+    url = "https://" + name + ".fang.com/chengjiao/"
     try:
         driver = webdriver.Firefox(executable_path=__geckodriverPath)
         driver.get(url)
-        count = 0
-        __getChenJiaoFromHtml(driver.page_source, count, result)
+        __getChenJiaoFromHtml(driver.page_source, result, name)
         element = driver.find_element_by_id("ctl00_hlk_next")
         while(element):
             element.click()
-            count = count + 1
-            __getChenJiaoFromHtml(driver.page_source, count, result)
+            result['count'] = result['count'] + 1
+            __getChenJiaoFromHtml(driver.page_source, result, name)
             element = driver.find_element_by_id("ctl00_hlk_next")
     except NoSuchElementException:
         print('There is no  more data! {}, total: {}'.format(driver.current_url, len(result['items'])))
     finally:
         driver.close()
-        append('./data/data.txt', json.dumps(result))
+        #print(json.dumps(result))
 
 
 def getPriceByAreaName(areaName):

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="./js/chart.js"></script>
@@ -18,15 +18,28 @@
 </head>
 
 <body>
-
-    <div class="chart-container" style="position: relative; height:35vh; width:65vw">
-        <canvas id="myChart"></canvas>
+    <div class="container">
+        <div class="chart-container" style="position: relative;">
+            <canvas id="myChart"></canvas>
+        </div>
+    
+        <div class="chengjiao">
+            <table id="chengjiao_tb" class="table table-hover"></table>
+        </div>
     </div>
+    
 
 
 
     <script>
-        var dataAvg = ${dataAvg};
+        var dataAvg = ${dataAvg}
+        var dataChengjiao = ${dataChengjiao}
+        var drawChnegjiaoTable = function(result) {
+            $('#chengjiao_tb').DataTable({
+                data: result.items,
+                columns: result.labels
+            });
+        }
         var drawChart = function (data) {
             var ctx = document.getElementById('myChart').getContext('2d');
             var chart = new Chart(ctx, {
@@ -89,6 +102,7 @@
             });
         };
         drawChart(dataAvg);
+        drawChnegjiaoTable(dataChengjiao);
     </script>
 </body>
 
