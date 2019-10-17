@@ -41,7 +41,13 @@ def __createIndexHtml(jsonData, dataChengjiao):
 def getInfo():
     areas = ['华沙一村', '园西一居', '临丰小区', '青夏小区', '上浦小区']
     dataAvg = getAvgPrice(areas)
-    areaNames = ['yuanxierju', 'huashayicun']
+    areaNames = {
+        'huashayicun' : '华沙一村',
+        'yuanxierju' : '园西一居',
+        'linfengxiaoqu' : '临丰小区',
+        'qingxiaxiaoqu' : '青夏小区',
+        'shangpuxiaoqu' : '上浦小区'
+    }
     chengJiaoResult = getChengjiao(areaNames)
     __createIndexHtml(dataAvg, chengJiaoResult)
     #driver = webdriver.Firefox(executable_path=geckodriverPath)

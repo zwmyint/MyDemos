@@ -56,7 +56,7 @@ def __getAreaPrice(areaCode):
         print('Success!')
 
 
-def __getChenJiaoFromHtml(html, result, name):
+def __getChenJiaoFromHtml(html, result, name, value):
     d = pq(html)
     if(result['count'] == 0):
         th = d('div.dealSent table tr th').items()
@@ -72,28 +72,29 @@ def __getChenJiaoFromHtml(html, result, name):
             item = []
         item.append(str(j.text().replace('\n', ' ')))
         if (split > 0 and split % 5 == 0):
-            item.insert(0, name)
+            item.insert(0, value)
             result['items'].append(item)
             split = 0
         else:
             split += 1
 
 
-def __getChengJiaoByName(name, driver, result):
-    url = "https://" + name + ".fang.com/chengjiao/"
-    try:
-        driver.get(url)
-        __getChenJiaoFromHtml(driver.page_source, result, name)
-        element = driver.find_element_by_id("ctl00_hlk_next")
-        while(element):
-            element.click()
-            result['count'] = result['count'] + 1
-            __getChenJiaoFromHtml(driver.page_source, result, name)
+def __getChengJiaoByName(areaNames, driver, result):
+    for name in areaNames:
+        url = "https://" + name + ".fang.com/chengjiao/"
+        try:
+            driver.get(url)
+            __getChenJiaoFromHtml(driver.page_source, result, name, areaNames[name])
             element = driver.find_element_by_id("ctl00_hlk_next")
-    except NoSuchElementException:
-        print('There is no  more data! {}, total: {}'.format(driver.current_url, len(result['items'])))
-    finally:
-        pass
+            while(element):
+                element.click()
+                result['count'] = result['count'] + 1
+                __getChenJiaoFromHtml(driver.page_source, result, name, areaNames[name])
+                element = driver.find_element_by_id("ctl00_hlk_next")
+        except NoSuchElementException:
+            print('There is no  more data! {}, total: {}'.format(driver.current_url, len(result['items'])))
+        finally:
+            pass
 
 def __getPriceByAreaName(areaName):
     areaCode = __getAreaCode(areaName)
@@ -116,8 +117,7 @@ def getChengjiao(areaNames):
     result['count'] = 0
     try:
         driver = webdriver.Firefox(executable_path=__geckodriverPath)
-        for name in areaNames:
-            __getChengJiaoByName(name, driver, result)
+        __getChengJiaoByName(areaNames, driver, result)
     finally:
         driver.close()
     return json.dumps(result)

@@ -15,7 +15,13 @@ def indexHtml(jsonStr):
 def main():
     #indexHtml('')
     #print(format(1475251200000))
-    getChengjiao([])
+    #getChengjiao([])
+    city = {
+        "name": "你好！"
+    }
+
+    for key in city:
+        print(city[key])
    
 
 if __name__ == '__main__':
