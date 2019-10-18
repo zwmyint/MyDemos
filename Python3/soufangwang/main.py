@@ -42,11 +42,12 @@ def getInfo():
     areas = ['华沙一村', '园西一居', '临丰小区', '青夏小区', '上浦小区']
     dataAvg = getAvgPrice(areas)
     areaNames = {
+        'shangpuxiaoqu' : '上浦小区',
         'huashayicun' : '华沙一村',
         'yuanxierju' : '园西一居',
         'linfengxiaoqu' : '临丰小区',
-        'qingxiaxiaoqu' : '青夏小区',
-        'shangpuxiaoqu' : '上浦小区'
+        'qingxiaxiaoqu2' : '青夏小区'
+        
     }
     chengJiaoResult = getChengjiao(areaNames)
     __createIndexHtml(dataAvg, chengJiaoResult)

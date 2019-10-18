@@ -37,7 +37,6 @@ def __getAreaCode(areaName):
 
 # return price array
 
-
 def __getAreaPrice(areaCode):
     try:
         response = requests.get('https://fangjia.fang.com/fangjia/common/ajaxdetailtrenddata/' + __city, params={
@@ -55,6 +54,20 @@ def __getAreaPrice(areaCode):
     else:
         print('Success!')
 
+def __getPriceByAreaName(areaName):
+    areaCode = __getAreaCode(areaName)
+    price = __getAreaPrice(areaCode)
+    result = '"' + areaName + '" : ' + price
+    return result
+
+def getAvgPrice(areaNames):
+    price = ''
+    for area in areaNames:
+        price = price + __getPriceByAreaName(area) + ','
+    price = price[:-1]
+    content = '{' + price + '}'
+    dataAvg = json.loads(content)
+    return dataAvg
 
 def __getChenJiaoFromHtml(html, result, name, value):
     d = pq(html)
@@ -95,22 +108,7 @@ def __getChengJiaoByName(areaNames, driver, result):
             print('There is no  more data! {}, total: {}'.format(driver.current_url, len(result['items'])))
         finally:
             pass
-
-def __getPriceByAreaName(areaName):
-    areaCode = __getAreaCode(areaName)
-    price = __getAreaPrice(areaCode)
-    result = '"' + areaName + '" : ' + price
-    return result
-
-def getAvgPrice(areaNames):
-    price = ''
-    for area in areaNames:
-        price = price + __getPriceByAreaName(area) + ','
-    price = price[:-1]
-    content = '{' + price + '}'
-    dataAvg = json.loads(content)
-    return dataAvg
-
+        result['count'] = result['count'] + 1
 
 def getChengjiao(areaNames):
     result = {}
