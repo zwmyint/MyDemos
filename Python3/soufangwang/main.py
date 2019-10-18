@@ -11,7 +11,7 @@ from datetimeutil import format
 geckodriverPath = r'./drivers/geckodriver.exe'
 
 def __createIndexHtml(jsonData, dataChengjiao):
-    colors = ['#FF6384', '#36A2EB', '#9C27B0', '#673AB7', '#3F51B5', '#009688', '#4CAF50', '#AED581', '#EEFF41', '#FF8A65', '#FFEB3B']
+    colors = ['#EF5350', '#FFA726', '#FFEA00', '#66BB6A', '#29B6F6', '#8D6E63', '#7E57C2', '#FF5252', '#EEFF41', '#283593', '#CE93D8']
     dataAvg = {}
     datasets = []
     labels = []
