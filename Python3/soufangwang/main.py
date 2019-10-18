@@ -4,6 +4,7 @@ from fangtianxia import getChengjiao
 from fileutil import read
 from fileutil import write
 import json
+import os
 from datetimeutil import format
 
 
@@ -51,8 +52,8 @@ def getInfo():
     }
     chengJiaoResult = getChengjiao(areaNames)
     __createIndexHtml(dataAvg, chengJiaoResult)
-    #driver = webdriver.Firefox(executable_path=geckodriverPath)
-    #driver.get("file:///" + indexPath)
+    driver = webdriver.Firefox(executable_path=geckodriverPath)
+    driver.get("file:///" + os.getcwd() + '/frontend/index.html')
 
 def main():
     getInfo()
