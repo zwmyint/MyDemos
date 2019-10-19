@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from datetime import datetime
 from requests.exceptions import HTTPError
-from fileutil import append
+
 
 __city = 'sh'
 __years = 3
