@@ -8,7 +8,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.common.exceptions import WebDriverException
 from datetime import datetime
 from requests.exceptions import HTTPError
-from fileutil import append
+
 
 __city = 'sh'
 __years = 3
