@@ -133,7 +133,7 @@ def __initRemoteSeleniumDriver():
     capabilities = DesiredCapabilities.CHROME
     capabilities['acceptSslCerts'] = True
     capabilities['acceptInsecureCerts'] = True
-    return webdriver.Remote(command_executor='http://9.30.161.12:4444/wd/hub', 
+    return webdriver.Remote(command_executor='http://19.130.161.12:4444/wd/hub', 
     desired_capabilities=capabilities, 
     browser_profile=None, 
     proxy=None, keep_alive=False, file_detector=None, options=None)
