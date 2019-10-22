@@ -1,8 +1,11 @@
 import requests
 import json
+import time
 from pyquery import PyQuery as pq
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.common.exceptions import WebDriverException
 from datetime import datetime
 from requests.exceptions import HTTPError
 from fileutil import append
@@ -90,13 +93,26 @@ def __getChenJiaoFromHtml(html, result, name, value):
             split = 0
         else:
             split += 1
+def __getHtmlSource(driver, url, retry):
+    try:
+        print('{} times retry to open url {}'.format(retry, url))
+        driver.get(url)
+    except WebDriverException:
+        if (retry > 0):
+            time.sleep(3)
+            retry = retry - 1
+            __getHtmlSource(driver, url, retry)
+        if (retry == 0):
+            driver.close()
+
 
 
 def __getChengJiaoByName(areaNames, driver, result):
+    __retry = 5
     for name in areaNames:
         url = "https://" + name + ".fang.com/chengjiao/"
         try:
-            driver.get(url)
+            __getHtmlSource(driver, url, __retry)
             __getChenJiaoFromHtml(driver.page_source, result, name, areaNames[name])
             element = driver.find_element_by_id("ctl00_hlk_next")
             while(element):
@@ -105,16 +121,28 @@ def __getChengJiaoByName(areaNames, driver, result):
                 __getChenJiaoFromHtml(driver.page_source, result, name, areaNames[name])
                 element = driver.find_element_by_id("ctl00_hlk_next")
         except NoSuchElementException:
-            print('There is no  more data! {}, total: {}'.format(driver.current_url, len(result['items'])))
+            print('There is no more data! {}, total: {}'.format(driver.current_url, len(result['items'])))
         finally:
             pass
         result['count'] = result['count'] + 1
+
+def __initLocalSeleniumDriver():
+    return webdriver.Firefox(executable_path=__geckodriverPath)
+
+def __initRemoteSeleniumDriver():
+    capabilities = DesiredCapabilities.CHROME
+    capabilities['acceptSslCerts'] = True
+    capabilities['acceptInsecureCerts'] = True
+    return webdriver.Remote(command_executor='http://9.30.161.12:4444/wd/hub', 
+    desired_capabilities=capabilities, 
+    browser_profile=None, 
+    proxy=None, keep_alive=False, file_detector=None, options=None)
 
 def getChengjiao(areaNames):
     result = {}
     result['count'] = 0
     try:
-        driver = webdriver.Firefox(executable_path=__geckodriverPath)
+        driver = __initLocalSeleniumDriver()
         __getChengJiaoByName(areaNames, driver, result)
     finally:
         driver.close()
