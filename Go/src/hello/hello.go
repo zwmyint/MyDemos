@@ -25,6 +25,17 @@ func main() {
 
 	fmt.Printf("%T, %d", SPRING, SPRING)
 
+
+	//itoa
+
+	const(
+		e = iota
+		r = iota
+		t = iota
+	)
+	fmt.Printf("\n-------\n")
+	fmt.Printf("%d, %d, %d", e, r, t)
+
 	
 
 }
