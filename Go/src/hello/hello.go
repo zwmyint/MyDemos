@@ -1,5 +1,8 @@
 package main
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 	//变量的默认值
@@ -57,16 +60,136 @@ func main() {
 
   var movies = [3] string {"a", "b", "c"}
 
-  var p *string;
-  p = &movies[0];
-  var ptr **string = &p; 
-  fmt.Println(*p);
-  fmt.Println(**ptr);
+  var p *string
+  p = &movies[0]
+  var ptr **string = &p;
+  fmt.Println(*p)
+	fmt.Println(**ptr)
+
+	//Func
+	fmt.Printf("\n-------\n")
+	foo("Tom");
+	fmt.Println(foo1("Lyn"))
+
+	//string apis
+	fmt.Printf("\n-------\n")
+
+	var sname = "tom_SH"
+	var saddr = "SH"
+
+	fmt.Println(strings.Compare(sname, saddr))
+	fmt.Println(strings.Contains(sname, saddr))
+	fmt.Println(strings.Contains(sname, saddr))
+	fmt.Println(strings.Count("cheese", "e"))
+	fmt.Println(strings.EqualFold("Go", "go"))
+	fmt.Println(strings.HasPrefix("Gopher", "Go"))
+	fmt.Println(strings.HasSuffix("Gopher", "Go"))
+
+	s := []string{"foo", "bar", "baz"}
+	fmt.Println(strings.Join(s, ", "))
+	fmt.Println(strings.Index("go gopher", "go"))
+	fmt.Println(strings.LastIndex("go gopher", "go"))
+	fmt.Println(strings.LastIndex("go gopher", "rodent"))
+
+	//最后一个表示执行替换几次
+	fmt.Println(strings.Replace("oink oink oink", "k", "ky", 2))
+	fmt.Println(strings.Replace("oink oink oink", "oink", "moo", -1))
+	fmt.Println(strings.ReplaceAll("oink oink oink", "oink", "moo"))
+
+	fmt.Printf("%q\n", strings.Split("a,b,c", ","))
+	fmt.Printf("%q\n", strings.Split("a man a plan a canal panama", "a "))
+	fmt.Printf("%q\n", strings.Split("", "Bernardo O'Higgins"))
+
+	fmt.Println(strings.ToLower("Gopher"))
+	fmt.Println(strings.ToUpper("Gopher"))
+
+	fmt.Println(strings.ToTitle("loud noises"))
+
+	fmt.Println(strings.Trim("¡¡¡Hello, Gophers!!!", "!¡"))
+	fmt.Println(strings.Trim(" Hello, Gophers", " "))
+
+	//Array
+	fmt.Printf("\n-------\n")
+
+	var fruit = [3] string {"apple", "banana", "orange"}
+	var i int;
+	//var pFruit *[3]string
+	for i = 0; i< len(fruit); i++ {
+		fmt.Println(fruit[i])
+	}
+
+	//struct
+	fmt.Printf("\n-------\n")
+	type Book struct {
+		title string
+		id int
+	}
+
+	var book Book
+	book.title = "C++"
+	book.id = 1
+
+	var pbook *Book
+	pbook=&book
+	fmt.Println(pbook.id)
+
+	//Slices
+	fmt.Printf("\n-------\n")
+
+	var nums = []int {1, 2, 3}
+	fmt.Println(nums[1])
+	fmt.Println(len(nums))
+
+	var nums1 = make([]int, 3, 5)
+	fmt.Println(nums1[0])
+	fmt.Println(nums1[1])
+	fmt.Println(nums1[2])
+	//fmt.Println(nums1[3])
+	//fmt.Println(nums1[4])
+	fmt.Println(len(nums1))
+	fmt.Println(cap(nums1))
+
+	//Subslicing
+	var strs []string 
+	strs = strings.Split("Because of the 2019-nCov outbreak, I stay home for a long time.", " ")
+	var strssub []string
+	strssub = strs[0:10]
+	fmt.Println(strssub[1])
+
+	var strssub1 []string
+	fmt.Println(len(strs))
+	//Must make before copy!!!
+	strssub1 = make([]string, len(strs))
+	copy(strssub1, strs)
+	fmt.Println(len(strssub1))
+
+	var strssub2 []string
+	strssub2 = append(strs, "hello");
+	fmt.Println(strssub2)
 
 
 
 
 
+
+	
+
+
+
+
+
+
+
+
+
+}
+
+func foo(name string) {
+	fmt.Printf("Your name is %s\n", name);
+}
+
+func foo1 (name string) string {
+	return "Your name is " + name;
 }
 
 
