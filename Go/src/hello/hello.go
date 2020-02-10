@@ -2,6 +2,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"math"
 )
 
 func main() {
@@ -164,24 +165,63 @@ func main() {
 	fmt.Println(len(strssub1))
 
 	var strssub2 []string
-	strssub2 = append(strs, "hello");
+	strssub2 = append(strs, "hello")
 	fmt.Println(strssub2)
 
+	//Range on array
+	fmt.Printf("\n-------\n")
+	for index := range strs {
+		fmt.Printf("%d, %s\n", index, strs[index])
+	}
 
+	//Range on map
+	countryCapitalMap := map[string] string {"France":"Paris","Italy":"Rome","Japan":"Tokyo"}
+	for country, captial := range countryCapitalMap {
+		fmt.Printf("%s --> %s\n", country, captial)
+	}
 
+	//Map
 
+	var cats map[string]string
+	cats = make(map[string]string)
+	cats["red"] = "red_cat"
+	cats["green"] = "green_cat"
+	cats["gray"] = "gray_cat"
 
+	for color:= range cats {
+		fmt.Printf("%s --> %s\n", color, cats[color])
+	}
+
+	// is exist
+	cat, ok := cats["green"]
+	if ok {
+		fmt.Printf("exist %s\n", cat)
+	} else {
+		fmt.Printf("nil")
+	}
+
+	// delete
+	delete(cats, "red");
+	fmt.Printf("\n-------\n")
+	for color:= range cats {
+		fmt.Printf("%s --> %s\n", color, cats[color])
+	}
+
+	// recursion
+	fmt.Printf("\n-------\n")
+	fmt.Println(fact(1))
+	fmt.Println(fact(5))
+
+	//interface
+	fmt.Printf("\n-------\n")
+
+	circle := Circle{x:0,y:0,radius:5}
+  rectangle := Rectangle {width:10, height:5}
+   
+  fmt.Printf("Circle area: %f\n",getArea(circle))
+  fmt.Printf("Rectangle area: %f\n",getArea(rectangle))
 
 	
-
-
-
-
-
-
-
-
-
 }
 
 func foo(name string) {
@@ -190,6 +230,40 @@ func foo(name string) {
 
 func foo1 (name string) string {
 	return "Your name is " + name;
+}
+
+
+func fact (num int) int {
+	if num <=1 {
+		return 1
+	} else {
+		return num * fact(num -1 )
+	}
+}
+
+//interface 
+type Shape interface {
+	area() float64
+}
+
+type Circle struct {
+	x, y, radius float64
+}
+
+type Rectangle struct {
+	width, height float64
+}
+
+func (circle Circle) area() float64 {
+	return math.Pi * circle.radius * circle.radius
+}
+
+func(rect Rectangle) area() float64 {
+	return rect.width * rect.height
+}
+
+func getArea(shape Shape) float64 {
+	return shape.area()
 }
 
 
