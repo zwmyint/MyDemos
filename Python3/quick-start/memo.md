@@ -8,3 +8,11 @@ pip install pyinstaller
 pyinstaller -F xxx.py
 
 ```
+
+
+## 打开 .ipynb文件
+
+```python
+
+jupyter notebook
+```
