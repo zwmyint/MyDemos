@@ -20,6 +20,11 @@ or
 pip3 install pysimplegui
 ```
 
+## Usage
+
+```
+py.exe .\copyright.py
+```
 
 ### References
 
